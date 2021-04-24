@@ -24,7 +24,7 @@ Download sources to ~/rpmbuild/SOURCES
 
 ```
 spectool -g -R lv2-DISTRHO.spec
-rpmbuild -ba lv2-DISTRORHO.spec
+rpmbuild -ba lv2-DISTRHO.spec
 ```
 
 ## Rebuild from .SRPM
