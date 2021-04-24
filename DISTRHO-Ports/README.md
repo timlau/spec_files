@@ -61,6 +61,8 @@ lv2-DISTRHO-Wolpertinger-0-0.1.2021_03_15.fc34.x86_64.rpm
 
 ### Install RPMs
 
-'''
+```
 sudo dnf install ~/rpmbuild/RPMS/x86_64/lv2-DISTRHO-*.rpm
-'''
+```
+
+
