@@ -16,15 +16,13 @@ Source0:    https://github.com/DISTRHO/DISTRHO-Ports/archive/refs/tags/%{github_
 
 BuildRequires:  gcc-c++
 BuildRequires:  meson
-BuildRequires:  fftw-devel
-BuildRequires:  alsa-lib-devel
-BuildRequires:  freetype-devel
-BuildRequires:  libX11-devel
-BuildRequires:  libXext-devel
-BuildRequires:  mesa-libGL-devel
-BuildRequires:  libXcursor-devel
-
-Requires:       lv2
+BuildRequires:  pkgconfig(fftw3f)
+BuildRequires:  pkgconfig(alsa) 
+BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(x11) 
+BuildRequires:  pkgconfig(xext)
+BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(xcursor)
 
 %description
 Misc audio production plugins ported to linux lv2 plugins by DISTRHO
@@ -317,5 +315,7 @@ drumsynth lv2 plugin
 %{_libdir}/lv2/Wolpertinger.lv2/*
 
 %changelog
-* Fri Apr 23 2021 Tim Lauridsen <tla@rasmil.dk> 1.0-1
+* Tue Apr 27 2021 Tim Lauridsen <tla@rasmil.dk> 0-0.2.2021_03_15
+- use pkgconfig() for build requirements
+* Fri Apr 23 2021 Tim Lauridsen <tla@rasmil.dk> 0-0.1.2021_03_15
 - Initial build

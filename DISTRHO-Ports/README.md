@@ -14,8 +14,7 @@ rpmdev-setuptree
 ## Install build requirements
 
 ```
-sudo dnf install gcc-c++ meson fftw-devel alsa-lib-devel freetype-devel \
-                 libX11-devel libXext-devel mesa-libGL-devel libXcursor-devel
+sudo dnf builddep lv2-DISTRHO.spec
 ```
 
 ## Build from spec
