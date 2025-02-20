@@ -26,13 +26,16 @@ clone:
 ifeq (,$(wildcard $(SRC_DIR)))
 	@echo "Cloning repository"
 	@git clone $(GIT_URL) $(SRC_DIR)
-	@cd $(SRC_DIR); git checkout -b release $(GIT_TAG); git submodule update --init --recursive
+	# @cd $(SRC_DIR); git checkout -b release $(GIT_TAG); git submodule update --init --recursive
+	@cd $(SRC_DIR); git submodule update --init --recursive
 	@echo "Repository cloned : $(SRC_DIR)"
 endif
 
 srpm: archive
 	@echo "Building SRPM"
-	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
+	@rm -rf $(BUILDDIR)/SRPMS
+	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
+	@rpmbuild --define '_topdir $(BUILDDIR)' --define 'gitdate $(GITDATE)' -bs $(PROJECT).spec
 
 mockbuild: srpm
 	@echo "Building RPM in mock"
@@ -53,7 +56,8 @@ show:
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
-
+	$(eval GITDATE := git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
+	@echo "Git date          : $(GITDATE)"
 clean:
 	@rm -rf $(BUILDDIR)
 
