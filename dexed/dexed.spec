@@ -2,11 +2,10 @@
 
 # relative directory where the build results is placed
 %global builddest redhat-linux-build/Source/Dexed_artefacts
-%global gitref gite087754
 
 Name:           dexed
 Version:        0.9.8
-Release:        1.%{gitref}%{?dist}
+Release:        2%{?dist}
 Summary:        Standalone version of Dexed a synth that is closely modeled on the Yamaha DX7
 
 License:        GPLv3
@@ -83,5 +82,7 @@ install %{builddest}/Standalone/Dexed %{buildroot}%{_bindir}/
 %{_bindir}/Dexed
 
 %changelog
+* Thu Feb 20 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-2
+  package released version not the git version
 * Wed Feb 19 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-1.gite087754
   Initial package
