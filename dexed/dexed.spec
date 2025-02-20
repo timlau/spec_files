@@ -11,9 +11,9 @@ Summary:        Standalone version of Dexed a synth that is closely modeled on t
 License:        GPLv3
 URL:            https://github.com/asb2m10/dexed
 
-# Make a tarball of the source code with all submodules included
-# git clone --recurse-submodules git@github.com:asb2m10/dexed.git  
-# git ls-files --recurse-submodules | tar caf ~/rpmbuild/SOURCES/dexed-0.9.8.tar.gz --xform s:^:dexed-0.9.8/: --verbatim-files-from -T- 
+# The source for this package was pulled from upstream's vcs.
+# chech here : https://github.com/timlau/spec_files/tree/master/dexed
+# for a Makefile that can be used to create the source tarball
 
 Source0:        %{name}-%{version}.tar.gz
 
@@ -83,6 +83,6 @@ install %{builddest}/Standalone/Dexed %{buildroot}%{_bindir}/
 
 %changelog
 * Thu Feb 20 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-2
-  package released version not the git version
+- package released version not the git version
 * Wed Feb 19 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-1.gite087754
-  Initial package
+- Initial package
