@@ -31,7 +31,12 @@ ifeq (,$(wildcard $(SRC_DIR)))
 	@echo "Repository cloned : $(SRC_DIR)"
 endif
 
-srpm: archive
+update-gitdate:
+	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
+	@echo "Updating spec file with git date : $(GITDATE)"
+	@sed -i -e "s/\.git[0-9]*\.[0-9a-f]*/$(GITDATE)/" $(PROJECT).spec
+
+srpm: archive update-gitdate
 	@echo "Building SRPM"
 	@rm -rf $(BUILDDIR)/SRPMS
 	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
@@ -56,8 +61,7 @@ show:
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
-	$(eval GITDATE := git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
-	@echo "Git date          : $(GITDATE)"
+
 clean:
 	@rm -rf $(BUILDDIR)
 
