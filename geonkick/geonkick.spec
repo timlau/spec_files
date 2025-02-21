@@ -8,10 +8,11 @@ Summary:        Geonkick - a free software percussion synthesizer
 License:        GPLv3
 URL:            https://github.com/Geonkick-Synthesizer/geonkick/
 Source0:        https://github.com/Geonkick-Synthesizer/geonkick/archive/refs/tags/v%{version}.tar.gz
+Patch0:         0001-no-arguments-for-geonkick_midi_channels_number.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
-BuildRequires:  pkgconfig(jack)
+BuildRequires:  jack-audio-connection-kit-devel
 BuildRequires:  pkgconfig(sndfile)
 BuildRequires:  pkgconfig(RapidJSON)
 BuildRequires:  pkgconfig(lv2)

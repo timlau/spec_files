@@ -17,6 +17,7 @@ ifeq (,$(wildcard $(TAR_GZ)))
 	@mkdir -p ${BUILDDIR}/SOURCES
 	@spectool -g -S $(PROJECT).spec -C ${BUILDDIR}/SOURCES
 	@echo "Archive created : $(TAR_GZ)"
+	cp *.patch ${BUILDDIR}/SOURCES
 endif
 
 srpm: archive

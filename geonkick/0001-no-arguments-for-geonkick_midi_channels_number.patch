@@ -1,0 +1,39 @@
+From 19c1a2d5c6688473cf75a68f9fed821743c99e13 Mon Sep 17 00:00:00 2001
+From: Iurie Nistor <iuriehn@gmail.com>
+Date: Mon, 27 Jan 2025 16:22:04 +0200
+Subject: [PATCH] no arguments for geonkick_midi_channels_number
+
+---
+ src/dsp/src/geonkick.c | 2 +-
+ src/dsp/src/geonkick.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/dsp/src/geonkick.c b/src/dsp/src/geonkick.c
+index cc111d3c..322ea123 100755
+--- a/src/dsp/src/geonkick.c
++++ b/src/dsp/src/geonkick.c
+@@ -1570,7 +1570,7 @@ geonkick_ged_forced_midi_channel(struct geonkick *kick,
+ }
+ 
+ size_t
+-geonkick_midi_channels_number(struct geonkick *kick)
++geonkick_midi_channels_number(void)
+ {
+         return GEONKICK_MAX_MIDI_CHANNELS;
+ }
+diff --git a/src/dsp/src/geonkick.h b/src/dsp/src/geonkick.h
+index 829360c2..d3da4441 100755
+--- a/src/dsp/src/geonkick.h
++++ b/src/dsp/src/geonkick.h
+@@ -626,7 +626,7 @@ geonkick_ged_forced_midi_channel(struct geonkick *kick,
+                                  bool *force);
+ 
+ size_t
+-geonkick_midi_channels_number();
++geonkick_midi_channels_number(void);
+ 
+ enum geonkick_error
+ geonkick_set_percussion_name(struct geonkick *kick,
+-- 
+2.48.1
+
