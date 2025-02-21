@@ -1,5 +1,5 @@
 PROJECT = neural-amp-modeler
-VERSION = 0.1.7
+VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
 GIT_DIR = ${BUILDDIR}
@@ -32,11 +32,16 @@ ifeq (,$(wildcard $(SRC_DIR)))
 	@echo "Repository cloned : $(SRC_DIR)"
 endif
 
-srpm: archive
+update-gitdate:
+	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
+	@echo "Updating spec file with git date : $(GITDATE)"
+	@sed -i -e "s/\.git[0-9]*\.[0-9a-f]*/$(GITDATE)/" $(PROJECT).spec
+
+srpm: archive update-gitdate
 	@echo "Building SRPM"
 	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
 #	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
-	@rpmbuild --define '_topdir $(BUILDDIR)' --define 'gitdate $(GITDATE)' -bs $(PROJECT).spec
+	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
 
 mockbuild: srpm
 	@echo "Building RPM in mock"
@@ -57,11 +62,9 @@ show:
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
-	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
-	@echo "Git date          : $(GITDATE)"
 
 clean:
 	@rm -rf $(BUILDDIR)
 
 
-.PHONY: all archive clone show clean
+.PHONY: all archive clone show clean update-gitdate
