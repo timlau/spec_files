@@ -2,7 +2,7 @@
 
 Name:           sfizz
 Version:        1.2.3
-Release:        2%{?gitdate}%{?dist}
+Release:        3%{?gitdate}%{?dist}
 Summary:        Sampler plugin and library for SFZ instruments
 
 License:        BSD-2-Clause
@@ -16,8 +16,8 @@ Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  pipewire-jack-audio-connection-kit-devel
 BuildRequires:  git
+BuildRequires:  pkgconfig(jack)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(x11) 
 BuildRequires:  pkgconfig(libcurl)
@@ -84,6 +84,8 @@ Sfizz puredata (pd) plugin
 %{_libdir}/pd/extra/sfizz/*
 
 %changelog
+* Fri Feb 21 2025 Tim Lauridsen <tla@rasmil.dk> - 1.2.3-3
+- use pkgconfig(jack) as buildrequire
 * Thu Feb 20 2025 Tim Lauridsen <tla@rasmil.dk> - 1.2.3-2
 - Converted to use pkgconfig BuildRequires
 - Don't build standalone clients and shared libraries

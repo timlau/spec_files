@@ -5,7 +5,7 @@
 
 Name:           dexed
 Version:        0.9.8
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Standalone version of Dexed a synth that is closely modeled on the Yamaha DX7
 
 License:        GPLv3
@@ -19,7 +19,7 @@ Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
-BuildRequires:  pipewire-jack-audio-connection-kit-devel
+BuildRequires:  pkgconfig(jack)
 BuildRequires:  pkgconfig(alsa) 
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(x11) 
@@ -82,6 +82,8 @@ install %{builddest}/Standalone/Dexed %{buildroot}%{_bindir}/
 %{_bindir}/Dexed
 
 %changelog
+* Fri Feb 21 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-3
+- use pkgconfig(jack) as buildrequire
 * Thu Feb 20 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-2
 - package released version not the git version
 * Wed Feb 19 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-1.gite087754
