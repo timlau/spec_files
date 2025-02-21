@@ -59,6 +59,7 @@ This package contains AIDA-X as a LV2 plugin.
 install -d -m 755 %{buildroot}%{_bindir}
 install -d -m 755 %{buildroot}%{_libdir}/vst3
 install -d -m 755 %{buildroot}%{_libdir}/clap
+install -d -m 755 %{buildroot}%{_libdir}/lv2
 cp -R %{builddest}/%{name}.vst3 %{buildroot}%{_libdir}/vst3/ 
 cp -R %{builddest}/%{name}.lv2 %{buildroot}%{_libdir}/lv2/ 
 install %{builddest}/%{name}.clap %{buildroot}%{_libdir}/clap/
