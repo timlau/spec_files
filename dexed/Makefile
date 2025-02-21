@@ -1,5 +1,5 @@
 PROJECT = dexed
-VERSION = 0.9.8
+VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
 GIT_DIR = ${BUILDDIR}

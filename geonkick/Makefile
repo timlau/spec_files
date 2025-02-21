@@ -1,5 +1,5 @@
 PROJECT = geonkick
-VERSION = 3.5.2
+VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
 SRC_DIR = $(GIT_DIR)/$(PROJECT)
