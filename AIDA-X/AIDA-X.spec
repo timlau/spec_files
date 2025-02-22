@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%global gitdate .git20250221.41eb988
+%global gitdate .git20250222.41eb988
 %global builddest redhat-linux-build/bin
 
 Name:           AIDA-X
@@ -17,8 +17,8 @@ Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
+BuildRequires:  pipewire-jack-audio-connection-kit-devel
 BuildRequires:  pkgconfig(gl)
-BuildRequires:  pkgconfig(jack)
 
 %description
 AIDA-X is an Amp Model Player, allowing it to load models of AI trained music gear, which you can then play through guitar
