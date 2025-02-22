@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%global gitdate .git20250221.8ddad71
+%global gitdate .git20250222.9a60937
 
 Name:           neural-amp-modeler
 Version:        0.1.7
