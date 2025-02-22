@@ -70,4 +70,4 @@ clean:
 	@rm -rf $(BUILDDIR)
 
 
-.PHONY: archive clone show clean mockinst mockbuild coprbuild srpm
+.PHONY: archive clone show clean mockinst mockbuild coprbuild srpm update-gitdate
