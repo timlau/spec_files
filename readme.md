@@ -1,4 +1,4 @@
-# RPM spec files and Makefile's to build audio applications & plugins for Fedora 40 & Later
+## RPM spec files and Makefile's to build audio applications & plugins for Fedora 40 & Later
 
 Build packages are available in the [timlau/audio](https://copr.fedorainfracloud.org/coprs/timlau/audio/) Fedora Copr Repository
 
