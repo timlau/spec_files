@@ -1,24 +1,75 @@
-# RPM spec files and Makefile's to build audio applications & plugins for Fedora
+# RPM spec files and Makefile's to build audio applications & plugins for Fedora 40 & Later
 
 Build packages are available in the [timlau/audio](https://copr.fedorainfracloud.org/coprs/timlau/audio/) Fedora Copr Repository
 
 ## Applications/Plugins
 
-#### AIDA-X
-AIDA-X is an Amp Model Player, allowing it to load models of AI trained music gear, which you can then play through guitar
+### Sfizz
 
-#### dexed
-Dexed is a multi platform, multi format plugin synth that is closely modeled on the Yamaha DX7.
-Dexed is also a midi cartridge librarian/manager for the DX7.
+Sfizz is a musical sampler, available as LV2 and VST plugins for musicians,
 
-#### geonkick
+### Dexed
+A synth that is closely modeled on the Yamaha DX7
+
+### Geonkick
 Geonkick is a synthesizer that can synthesize elements of percussion. The most basic examples are: kicks, snares, hit-hats, shakers, claps.
 
-#### neural-amp-modeler
-LV2 plugin for using neural network machine learning amp models
+### Neural Amp Modeler 
+LV2 plugin implementation Neural Amp Modeler
 
-#### sfizz
-Sfizz is a musical sampler, available as LV2 and VST plugins for musicians
+### AIDA-X
+AIDA-X is an Amp Model Player, allowing it to load models of AI trained music gear, which you can then play through guitar
+
+### Dragonfly Reverb
+Dragonfly Reverb is a bundle of free audio effects for Linux, MacOS, and Windows. The reverb algorithms are based on the original Freeverb. The DR-1 algorithm is based on the Schroeder/Moorer reverb. The DR-2 algorithm is based on the original Freeverb algorithm. The DR-3 algorithm is a unique reverb algorithm developed by Michael Willis.
+
+## Install from timlau/audio copr
+
+### enable copr repo in Fedora 40+
+```
+sudo dnf copr enable timlau/audio 
+```
+
+### Install sfizz audio plugins (vst3 or lv2)
+
+```
+sudo dnf install sfizz-vst3
+sudo dnf install sfizz-lv2
+```
+
+### Install Dexed (clap or vst3 or standalone)
+```
+sudo dnf install dexed-clap
+sudo dnf install dexed-vst3
+sudo dnf install dexed
+
+```
+
+### Install Geonkick (lv2 or standalone)
+```
+sudo dnf install geonkick
+sudo dnf install geonkick-lv2
+```
+
+### Install Neural Amp Modeler  (lv2)
+```
+sudo dnf install neural-amp-modeler-lv2
+```
+### Install AIDA-X (clap or vst3 or lv2 or standalone)
+```
+sudo dnf install AIDA-X-clap
+sudo dnf install AIDA-X-vst3
+sudo dnf install AIDA-X-lv2
+sudo dnf install AIDA-X
+```
+
+### Install dragonfly-reverb  (clap or vst3 or lv2  or standalone)
+```
+sudo dnf install dragonfly-reverb-clap
+sudo dnf install dragonfly-reverb-vst3
+sudo dnf install dragonfly-reverb-lv2
+sudo dnf install dragonfly-reverb
+```
 
 
 ## Make targets
