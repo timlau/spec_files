@@ -1,13 +1,14 @@
 PROJECT = sfizz
+GIT_URL = git@github.com:sfztools/sfizz-ui.git  
 VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
 GIT_DIR = ${BUILDDIR}
-GIT_URL = git@github.com:sfztools/sfizz-ui.git  
 GIT_TAG = $(VERSION)
 SRC_DIR = $(GIT_DIR)/$(PROJECT)
 TAR_GZ = ${BUILDDIR}/SOURCES/$(PROJECT)-$(VERSION).tar.gz
 MOCK_REL = fedora-41-x86_64
+MOCK_RESULT = /var/lib/mock/${MOCK_REL}/result
 COPR_REPO = audio
 
 all:
@@ -40,11 +41,14 @@ srpm: archive update-gitdate
 	@echo "Building SRPM"
 	@rm -rf $(BUILDDIR)/SRPMS
 	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
-	@rpmbuild --define '_topdir $(BUILDDIR)' --define 'gitdate $(GITDATE)' -bs $(PROJECT).spec
+	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
 
 mockbuild: srpm
 	@echo "Building RPM in mock"
 	@mock -r $(MOCK_REL) --rebuild $(BUILDDIR)/SRPMS/$(PROJECT)-$(VERSION)*.src.rpm
+
+mockinst:
+	@sudo dnf install $(MOCK_RESULT)/$(PROJECT)*-$(VERSION)*.x86_64.rpm
 
 coprbuild: srpm
 	@echo "Building RPM in copr"
@@ -66,4 +70,4 @@ clean:
 	@rm -rf $(BUILDDIR)
 
 
-.PHONY: all archive clone show clean
+.PHONY: archive clone show clean mockinst mockbuild coprbuild srpm update-gitdate

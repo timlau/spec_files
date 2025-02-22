@@ -8,11 +8,10 @@ GIT_TAG = v$(VERSION)
 SRC_DIR = $(GIT_DIR)/$(PROJECT)
 TAR_GZ = ${BUILDDIR}/SOURCES/$(PROJECT)-$(VERSION).tar.gz
 MOCK_REL = fedora-41-x86_64
+MOCK_RESULT = /var/lib/mock/${MOCK_REL}/result
 COPR_REPO = audio
 
-all:
-	@echo "Nothing to do, use a specific target"
-
+all: srpm
 
 archive: clone
 ifeq (,$(wildcard $(TAR_GZ)))
@@ -38,6 +37,9 @@ mockbuild: srpm
 	@echo "Building RPM in mock"
 	@mock -r $(MOCK_REL) --rebuild $(BUILDDIR)/SRPMS/$(PROJECT)-$(VERSION)*.src.rpm
 
+mockinst:
+	@sudo dnf install $(MOCK_RESULT)/$(PROJECT)*-$(VERSION)*.x86_64.rpm
+
 coprbuild: srpm
 	@echo "Building RPM in copr"
 	@copr-cli build --nowait $(COPR_REPO) $(BUILDDIR)/SRPMS/$(PROJECT)-$(VERSION)*.src.rpm
@@ -58,4 +60,4 @@ clean:
 	@rm -rf $(BUILDDIR)
 
 
-.PHONY: all archive clone show clean
+.PHONY: archive clone show clean mockinst mockbuild coprbuild srpm update-gitdate
