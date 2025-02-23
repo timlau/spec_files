@@ -21,5 +21,8 @@ coprbuild: srpm
 clean:
 	@rm -rf $(BUILDDIR)
 
+clean-archive:
+	@rm -rf $(BUILDDIR)/SOURCES/*
+
 
 .PHONY: clean mockinst mockbuild coprbuild 
