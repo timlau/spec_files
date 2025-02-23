@@ -1,6 +1,6 @@
 PROJECT = AIDA-X
 GIT_URL = git@github.com:AidaDSP/AIDA-X.git
 
-ROOT = ../common
+ROOT = ../../common
 include $(ROOT)/Makefile.githead.mk
 

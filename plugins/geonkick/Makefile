@@ -1,4 +1,4 @@
 PROJECT = geonkick
 
-ROOT = ../common
+ROOT = ../../common
 include $(ROOT)/Makefile.spectool.mk

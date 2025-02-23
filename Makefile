@@ -5,14 +5,14 @@ all:
 
 clean:
 	@for dir in $(SUBDIRS); do \
-		echo "Cleaning $$dir"; \
+		echo "Cleaning plugins/$$dir"; \
 		$(MAKE) -s -C $$dir clean; \
 	done
 
 show:
 	@for dir in $(SUBDIRS); do \
 		printf "\n######## $$dir ########\n\n"; \
-		$(MAKE) -s -C $$dir show; \
+		$(MAKE) -s -C plugins/$$dir show; \
 	done
 
 .PHONY: all clean
