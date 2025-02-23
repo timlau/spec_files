@@ -20,7 +20,7 @@ archive: clone
 ifeq (,$(wildcard $(TAR_GZ)))
 	@echo "Creating archive"
 	@mkdir -p ${BUILDDIR}/SOURCES
-	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
+	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) --ignore-failed-read --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
 	@echo "Archive created : $(TAR_GZ)"
 endif
 
