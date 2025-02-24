@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%global gitdate .git20250222.a74ffd3
+%global gitdate .git20250223.bcbffe53
 %global builddest bin
 
 Name:           surge-xt
@@ -18,11 +18,25 @@ Source0:        %{name}-%{version}.tar.gz
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
 BuildRequires:  pipewire-jack-audio-connection-kit-devel
-BuildRequires:  pkgconfig(gl)
-BuildRequires:  pkgconfig(x11) 
-BuildRequires:  pkgconfig(xext)
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(xkbcommon-x11)
+BuildRequires:  pkgconfig(xkbcommon)
+BuildRequires:  pkgconfig(xcb-cursor)
+BuildRequires:  pkgconfig(xcb-keysyms)
+BuildRequires:  pkgconfig(xcb-util)
+BuildRequires:  pkgconfig(xrandr)
+BuildRequires:  pkgconfig(xinerama)
+BuildRequires:  pkgconfig(xcursor)
 BuildRequires:  pkgconfig(xrender)
-
+BuildRequires:  pkgconfig(alsa) 
+BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(fontconfig)
+BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(webkit2gtk-4.1)
+BuildRequires:  pkgconfig(gtk+-x11-3.0)
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(alsa)
+BuildRequires:  pkgconfig(xcomposite)
 
 %description
 Surge XT is a free and open-source hybrid synthesizer, Featuring many synthesis techniques, a great selection of filters, a flexible modulation engine, a smorgasbord of effects, and modern features like MPE, microtuning (with MTS-ESP support), and comprehensive Open Sound Control (OSC) support. 
@@ -53,7 +67,7 @@ This package contains %{name} as a LV2 plugin.
 
 %build
 %cmake 
-%cmake_build
+%cmake_build --config Release --target surge-staged-assets
 
 %install
 %cmake_install
