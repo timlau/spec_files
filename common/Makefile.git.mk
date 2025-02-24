@@ -3,18 +3,20 @@ ifeq ($(ROOT),)
 $(error invalid usage)
 endif
 
+GIT_DIR = ${BUILDDIR}
 VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
-TAR_GZ = ${BUILDDIR}/SOURCES/v$(VERSION).tar.gz
+TAR_GZ = ${BUILDDIR}/SOURCES/$(PROJECT)-$(VERSION).tar.gz
+
 
 all: srpm
-
-archive:
-ifeq (,$(wildcard $(TAR_GZ)))
-	@echo "Creating archive"
+	
+archive: clone
+ifeq (, $(wildcard $(TAR_GZ)))
+	@echo "Creating archive: $(TAR_GZ)"
 	@mkdir -p ${BUILDDIR}/SOURCES
-	@spectool -g -S $(PROJECT).spec -C ${BUILDDIR}/SOURCES
+	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) $(ARCHIVE_EXCLUDE) --ignore-failed-read --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
 	@echo "Archive created : $(TAR_GZ)"
 	@$(MAKE) -s copy_pactches
 endif
@@ -22,14 +24,14 @@ endif
 show:
 	@echo "Project           : $(PROJECT)"
 	@echo "Project version   : $(VERSION)"
+	@echo "Git URL           : $(GIT_URL)"
 	@echo "Current directory : $(CURDIR)"
 	@echo "Build directory   : $(BUILDDIR)"
+	@echo "Source directory  : $(SRC_DIR)"
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
-	@echo "Build from spectool downloaded sources"
 
-
-.PHONY: archive clone show
+.PHONY: archive show
 
 include $(ROOT)/Makefile.build.mk

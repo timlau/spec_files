@@ -1,4 +1,5 @@
 SUBDIRS = dexed geonkick sfizz AIDA-X neural-amp-modeler dragonfly-reverb
+# ARCHIVE_EXCLUDE = plugins/dexed/*
 
 all:
 	@echo "Nothing to do, use a specific target"
@@ -15,4 +16,14 @@ show:
 		$(MAKE) -s -C plugins/$$dir show; \
 	done
 
-.PHONY: all clean
+
+TAR_GZ = ./plugins/dexed/build/SOURCES/dexed-0.9.8.tar.gz
+
+test:
+	@echo "wildcard : $(wildcard $(TAR_GZ))"
+ifeq (,$(wildcard $(TAR_GZ)))
+	@echo "Creating archive: $(TAR_GZ)"
+else
+	@echo "Archive already exists: $(TAR_GZ)"
+endif
+.PHONY: all clean test
