@@ -5,7 +5,7 @@
 
 Name:           dexed
 Version:        0.9.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Standalone version of Dexed a synth that is closely modeled on the Yamaha DX7
 
 License:        GPLv3
@@ -16,6 +16,7 @@ URL:            https://github.com/asb2m10/dexed
 # for a Makefile that can be used to create the source tarball
 
 Source0:        %{name}-%{version}.tar.gz
+Patch0:         0001-use-prebuild-juce.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -28,6 +29,7 @@ BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(webkit2gtk-4.0)
 BuildRequires:  pkgconfig(gtk+-x11-3.0)
 BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  cmake(JUCE)
 
 %description
 Dexed is a multi platform, multi format plugin synth that is closely modeled on the Yamaha DX7.
@@ -52,7 +54,7 @@ This package contains Dexed as a VST3 plugin.
 
 
 %prep
-%autosetup
+%autosetup -p1
 
 
 %build
@@ -82,6 +84,8 @@ install %{builddest}/Standalone/Dexed %{buildroot}%{_bindir}/
 %{_bindir}/Dexed
 
 %changelog
+* Fri Feb 21 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-4
+- Build with pre-build JUCE
 * Fri Feb 21 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-3
 - use pkgconfig(jack) as buildrequire
 * Thu Feb 20 2025 Tim Lauridsen <tla@rasmil.dk> - 0.9.8-2
