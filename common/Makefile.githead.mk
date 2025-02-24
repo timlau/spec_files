@@ -22,6 +22,7 @@ ifeq (,$(wildcard $(TAR_GZ)))
 	@mkdir -p ${BUILDDIR}/SOURCES
 	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) --ignore-failed-read --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
 	@echo "Archive created : $(TAR_GZ)"
+	@$(MAKE) -s copy_pactches
 endif
 
 clone:
@@ -37,11 +38,6 @@ update-gitdate:
 	$(eval GITDATE := .git$(shell date +%Y%m%d).$(shell git -C $(SRC_DIR) rev-parse --short HEAD))
 	@echo "Updating spec file with git date : $(GITDATE)"
 	@sed -i -e "s/\.git[0-9]*\.[0-9a-f]*/$(GITDATE)/" $(PROJECT).spec
-
-srpm: archive update-gitdate
-	@echo "Building SRPM"
-	@rm -rf $(BUILDDIR)/SRPMS
-	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
 
 show:
 	@echo "Project           : $(PROJECT)"

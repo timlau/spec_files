@@ -23,6 +23,7 @@ ifeq (,$(wildcard $(TAR_GZ)))
 	@mkdir -p ${BUILDDIR}/SOURCES
 	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
 	@echo "Archive created : $(TAR_GZ)"
+	@$(MAKE) -s copy_pactches
 endif
 
 clone:
@@ -32,10 +33,6 @@ ifeq (,$(wildcard $(SRC_DIR)))
 	@cd $(SRC_DIR); git checkout -b release $(GIT_TAG); git submodule update --init --recursive
 	@echo "Repository cloned : $(SRC_DIR)"
 endif
-
-srpm: archive
-	@echo "Building SRPM"
-	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
 
 show:
 	@echo "Project           : $(PROJECT)"

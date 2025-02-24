@@ -21,12 +21,8 @@ ifeq (,$(wildcard $(TAR_GZ)))
 	@mkdir -p ${BUILDDIR}/SOURCES
 	@spectool -g -S $(PROJECT).spec -C ${BUILDDIR}/SOURCES
 	@echo "Archive created : $(TAR_GZ)"
-	@-cp *.patch ${BUILDDIR}/SOURCES
+	@$(MAKE) -s copy_pactches
 endif
-
-srpm: archive
-	@echo "Building SRPM"
-	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
 
 show:
 	@echo "Project           : $(PROJECT)"
@@ -39,6 +35,6 @@ show:
 	@echo "Build from spectool downloaded sources"
 
 
-.PHONY: archive clone show srpm
+.PHONY: archive clone show
 
 include $(ROOT)/Makefile.build.mk

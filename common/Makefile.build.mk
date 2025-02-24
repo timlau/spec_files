@@ -6,6 +6,19 @@ DNF_BUILDDEP_INSTALLED = ${BUILDDIR}/DEPS_INSTALLED
 
 all: srpm
 
+copy_pactches:
+ifneq (,$(wildcard $(CURDIR)/*.patch))
+	@echo "--> Copying patches"
+	@echo $(wildcard $(CURDIR)/*.patch)
+	@cp $(CURDIR)/*.patch ${BUILDDIR}/SOURCES
+endif
+
+srpm: archive update-gitdate
+	@echo "Building SRPM"
+	@rm -rf $(BUILDDIR)/SRPMS
+	@rpmbuild --define '_topdir $(BUILDDIR)' -bs $(PROJECT).spec
+
+
 localbuild: srpm
 	@echo "Building RPM locally"
 ifeq (,$(wildcard $(DNF_BUILDDEP_INSTALLED)))
