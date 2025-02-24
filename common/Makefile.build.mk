@@ -2,8 +2,19 @@
 ifeq ($(ROOT),)
 $(error invalid usage)
 endif
+DNF_BUILDDEP_INSTALLED = ${BUILDDIR}/DEPS_INSTALLED
 
 all: srpm
+
+localbuild: srpm
+	@echo "Building RPM locally"
+ifeq (,$(wildcard $(DNF_BUILDDEP_INSTALLED)))
+	@sudo dnf builddep -y ${PROJECT}.spec
+	@touch $(DNF_BUILDDEP_INSTALLED)
+endif	
+	@rpmbuild --define "_topdir $(BUILDDIR)" -ba ${PROJECT}.spec
+	@echo "--> Build RPMs"
+	@tree -P *.rpm -I *.src.rpm $(BUILDDIR)/RPMS	
 
 mockbuild: srpm
 	@echo "Building RPM in mock"

@@ -90,6 +90,12 @@ make archive
 make srpm
 ```
 
+#### Building on localsystem (will build a new .src.rpm)
+will install build requirements defined in .spec before build
+```
+make localbuild
+```
+
 #### Building in local mock (will build a new .src.rpm)
 ```
 make mockbuild

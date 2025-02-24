@@ -7,10 +7,11 @@ VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
 CURDIR = ${shell pwd}
 BUILDDIR= $(CURDIR)/build
 SRC_DIR = $(GIT_DIR)/$(PROJECT)
-TAR_GZ = ${BUILDDIR}/SOURCES/v$(VERSION).tar.gz
+TAR_GZ = ${BUILDDIR}/SOURCES/$(VERSION).tar.gz
 MOCK_REL = fedora-41-x86_64
 MOCK_RESULT = /var/lib/mock/${MOCK_REL}/result
 COPR_REPO = audio
+DNF_BUILDDEP_INSTALLED = ${BUILDDIR}/DEPS_INSTALLED
 
 all: srpm
 
@@ -20,7 +21,7 @@ ifeq (,$(wildcard $(TAR_GZ)))
 	@mkdir -p ${BUILDDIR}/SOURCES
 	@spectool -g -S $(PROJECT).spec -C ${BUILDDIR}/SOURCES
 	@echo "Archive created : $(TAR_GZ)"
-	cp *.patch ${BUILDDIR}/SOURCES
+	@-cp *.patch ${BUILDDIR}/SOURCES
 endif
 
 srpm: archive
