@@ -1,18 +1,17 @@
 %global debug_package %{nil}
-%global gitdate .git20250222.a74ffd3
 %global builddest bin
 
 Name:           JUCE
 Version:        8.0.6
-Release:        1%{?gitdate}%{?dist}
+Release:        1%{?dist}
 Summary:        JUCE is an open-source cross-platform C++ application framework
 
 License:        GPLv3+
 URL:            https://github.com/juce-framework/JUCE
 
 Source0:        https://github.com/juce-framework/%{name}/archive/refs/tags/%{version}.tar.gz
-Patch0:         0001-fix-install-location.patch
-Patch1:         0002-fix-install-location.patch
+Patch0:         0001-fix-main-install-dirs.patch
+Patch1:         0002-fix-juceaid-install-location.patch
 
 BuildRequires:  gcc-c++
 BuildRequires:  cmake
@@ -40,25 +39,30 @@ BuildRequires:  pkgconfig(xcomposite)
 %description
 JUCE is an open-source cross-platform C++ application framework for creating desktop and mobile applications, including VST, VST3, AU, AUv3, AAX and LV2 audio plug-ins and plug-in hosts.
 
+%package -n lib%{name}-devel
+Summary:        JUCE is an open-source cross-platform C++ application framework
+
+%description -n lib%{name}-devel
+%{description}
+
 %prep
-%autosetup
+%autosetup -p1
 
 %build
-# set(JUCE_MODULE_PATH "include/JUCE-${JUCE_VERSION}/modules")
 %cmake 
 %cmake_build 
 
 %install
 %cmake_install --prefix %{_prefix}
 
-%files 
+%files -n lib%{name}-devel
 %license LICENSE.md
 %doc README.md
-%{_bindir}/*
-%{_libdir}/*    
-%{_includedir}/*
+%{_bindir}/juce*
+%{_libdir}/cmake/%{name}/*    
+%{_includedir}/%{name}/*
 
 
 %changelog
-* Sun Feb 23 2025 Tim Lauridsen <tla@rasmil.dk> - 1.0.0-1
+* Sun Feb 23 2025 Tim Lauridsen <tla@rasmil.dk> - 8.0.6-1
 - Initial package

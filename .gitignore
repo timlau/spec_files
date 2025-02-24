@@ -1,1 +1,5 @@
 plugins/*/build/
+plugins/JUCE/test/CMakeFiles/
+plugins/JUCE/test/CMakeCache.txt
+plugins/JUCE/test/Makefile
+plugins/JUCE/test/cmake_install.cmake

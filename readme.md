@@ -23,6 +23,11 @@ AIDA-X is an Amp Model Player, allowing it to load models of AI trained music ge
 #### Dragonfly Reverb
 Dragonfly Reverb is a bundle of free audio effects for Linux, MacOS, and Windows. The reverb algorithms are based on the original Freeverb. The DR-1 algorithm is based on the Schroeder/Moorer reverb. The DR-2 algorithm is based on the original Freeverb algorithm. The DR-3 algorithm is a unique reverb algorithm developed by Michael Willis.
 
+#### JUCE
+JUCE is an open-source cross-platform C++ application framework for creating desktop and mobile applications, including VST, VST3, AU, AUv3, AAX and LV2 audio plug-ins and plug-in hosts.
+This package is used to build application there is using the JUCE framework, so the package don't need to have the whole JUCE source and build it every time.
+a very basic dummy plugin made with JUCE is located [Here](https://github.com/timlau/juce-test)
+
 ## Install from timlau/audio copr
 
 ### enable copr repo in Fedora 40+
@@ -70,6 +75,12 @@ sudo dnf install dragonfly-reverb-vst3
 sudo dnf install dragonfly-reverb-lv2
 sudo dnf install dragonfly-reverb
 ```
+
+#### Install JUCE
+```
+sudo dnf install libJUCE-devel
+```
+
 
 
 ## Make targets
