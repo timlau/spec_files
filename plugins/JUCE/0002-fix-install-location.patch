@@ -1,0 +1,21 @@
+diff --git a/extras/Build/juceaide/CMakeLists.txt b/extras/Build/juceaide/CMakeLists.txt
+index 8f2f6be8c8..5b1256f5e2 100644
+--- a/extras/Build/juceaide/CMakeLists.txt
++++ b/extras/Build/juceaide/CMakeLists.txt
+@@ -34,6 +34,7 @@
+ # plists. To ensure that we always build it for the host system, and not for, say, a device or
+ # simulator if we're targeting iOS or Android, we reinvoke cmake here and build juceaide during the
+ # configuration stage of the outer project.
++include(GNUInstallDirs)
+ 
+ if(JUCE_BUILD_HELPER_TOOLS)
+     # Build the tool for the current system
+@@ -168,7 +169,7 @@ else()
+ 
+     add_executable(juce::juceaide ALIAS juceaide)
+ 
+-    set(JUCE_TOOL_INSTALL_DIR "bin/JUCE-${JUCE_VERSION}" CACHE STRING
++    set(JUCE_TOOL_INSTALL_DIR "${CMAKE_INSTALL_BINDIR}" CACHE STRING
+         "The location, relative to the install prefix, where juceaide will be installed")
+ 
+     install(PROGRAMS "${imported_location}" DESTINATION "${JUCE_TOOL_INSTALL_DIR}")
