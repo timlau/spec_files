@@ -3,12 +3,7 @@ ifeq ($(ROOT),)
 $(error invalid usage)
 endif
 
-VERSION=$(shell awk '/Version:/ { print $$2 }' ${PROJECT}.spec)
-CURDIR = ${shell pwd}
-BUILDDIR= $(CURDIR)/build
 SRC_DIR = $(GIT_DIR)/$(PROJECT)
-TAR_GZ = ${BUILDDIR}/SOURCES/$(PROJECT)-$(VERSION).tar.gz
-
 DNF_BUILDDEP_INSTALLED = ${BUILDDIR}/DEPS_INSTALLED
 MOCK_REL = fedora-41-x86_64
 MOCK_RESULT = /var/lib/mock/${MOCK_REL}/result
@@ -22,13 +17,20 @@ ifeq (,$(wildcard $(SRC_DIR)))
 	@git clone $(GIT_URL) $(SRC_DIR)
 ifdef GIT_TAG
 	@echo "--> Checking out git tag : $(GIT_TAG)"
-	@cd $(SRC_DIR); git checkout -b release $(GIT_TAG); git submodule update --init --recursive
+	@cd $(SRC_DIR); git checkout -b release $(GIT_TAG)
 else
 	@echo "--> No git tag specified, using master branch"
-	@cd $(SRC_DIR); git submodule update --init --recursive
 endif	
-	@echo "Repository cloned : $(SRC_DIR)"
+	@$(MAKE) -s update_submodules
+	@echo "Repository cloned into: $(SRC_DIR)"
 	@$(MAKE) -s update-gitdate
+endif
+
+update_submodules:
+	@cd $(SRC_DIR); git submodule update --init --recursive
+ifdef GITSUBMODULE_EXCLUDE
+	@echo "--> Excludeing git submodules : $(GITSUBMODULE_EXCLUDE)"
+	@@cd $(SRC_DIR); git submodule deinit $(GITSUBMODULE_EXCLUDE) 2>/dev/null
 endif
 
 copy_pactches:

@@ -1,6 +1,10 @@
 PROJECT  = new-plugin
 GIT_URL  = git@github.com:timlau/audio_spec_files.git
-# ARCHIVE_EXCLUDE = dir1/dir2/*
+
+# exclude submodules from source tarball
+# GITSUBMODULE_EXCLUDE = 
+
+# Checkout a give git tag
 # GIT_TAG = v$(VERSION)
 
 ROOT = ../../common

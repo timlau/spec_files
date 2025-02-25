@@ -16,7 +16,7 @@ archive: clone
 ifeq (, $(wildcard $(TAR_GZ)))
 	@echo "Creating archive: $(TAR_GZ)"
 	@mkdir -p ${BUILDDIR}/SOURCES
-	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) $(ARCHIVE_EXCLUDE) --ignore-failed-read --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
+	@cd $(SRC_DIR); git ls-files --recurse-submodules | tar caf $(TAR_GZ) --ignore-failed-read --xform s:^:$(PROJECT)-$(VERSION)/: --verbatim-files-from -T-
 	@echo "Archive created : $(TAR_GZ)"
 	@$(MAKE) -s copy_pactches
 endif
