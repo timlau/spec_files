@@ -58,7 +58,7 @@ BuildRequires:  pkgconfig(alsa)
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("deps", nargs="?", default=[])
+    parser.add_argument("deps", nargs="*", default=[])
     parser.add_argument("--notfound", action="store_true")
     parser.add_argument("--format", action="store_true")
     parser.add_argument("--markdown", action="store_true")
@@ -72,7 +72,7 @@ def main() -> None:
             if dep in dep_map:
                 found += 1
                 if not args.notfound:
-                    print(dep_map[dep])
+                    print(f"BuildRequires:  {dep_map[dep]}")
             else:
                 notfound += 1
                 if args.notfound:
