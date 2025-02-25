@@ -27,7 +27,7 @@ show:
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
-	@echo "Build from spectool downloaded sources"
+	@echo "Source            : spectool download"
 
 
 .PHONY: archive clone show

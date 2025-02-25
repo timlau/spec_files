@@ -31,6 +31,11 @@ show:
 	@echo "Tarball           : $(TAR_GZ)"
 	@echo "Mock release      : $(MOCK_REL)"
 	@echo "Copr repository   : $(COPR_REPO)"
+ifdef GIT_TAG
+	@echo "Source            : git checkout - Tag: $(GIT_TAG)"
+else
+	@echo "Source            : git checkout - HEAD"
+endif
 
 .PHONY: archive show
 

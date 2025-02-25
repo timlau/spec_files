@@ -1,4 +1,4 @@
-SUBDIRS = dexed geonkick sfizz AIDA-X neural-amp-modeler dragonfly-reverb
+SUBDIRS = $(shell ls plugins/)
 # ARCHIVE_EXCLUDE = plugins/dexed/*
 
 all:
