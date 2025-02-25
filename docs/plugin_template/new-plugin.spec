@@ -8,8 +8,7 @@ Release:        1%{?gitdate}%{?dist}
 Summary:        
 
 License:        GPLv3+
-URL:            https://surge-synthesizer.github.io/
-
+URL:            
 # The source for this package was pulled from upstream's vcs.
 # check here : https://github.com/timlau/spec_files/tree/master/plpugins/
 # for a Makefile that can be used to create the source tarball
