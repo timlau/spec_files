@@ -33,6 +33,15 @@ BuildRequires:  pkgconfig(alsa)
 |                        |                                               |
 |                        |                                               |
 |                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
+|                        |                                               |
  
 
  [^1]: sometimes pkgconfig(jack) is needed if the package has problems with building with the pipewire-jack 
