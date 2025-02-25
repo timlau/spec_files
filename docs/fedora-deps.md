@@ -1,3 +1,4 @@
+
 ### Mapping common used ubuntu build deps to fedora deps.
 
 Best practice in Fedora packages is to use the **pkgconfig(dependcy)** format to define build requirements
@@ -13,7 +14,7 @@ BuildRequires:  pkgconfig(alsa)
 | ubuntu build deps      | Fedora BuildRequire:                          |
 | -----------------------| ----------------------------------------------|
 | libasound2-dev         | pkgconfig(alsa)                               |
-| libjack-jackd2-dev     | pipewire-jack-audio-connection-kit-devel [^1] |
+| libjack-jackd2-dev     | pipewire-jack-audio-connection-kit-devel      |
 | libfreetype-dev        | pkgconfig(freetype2)                          |
 | libfontconfig1-dev     | pkgconfig(fontconfig)                         |
 | libx11-dev             | pkgconfig(x11)                                |
@@ -28,20 +29,13 @@ BuildRequires:  pkgconfig(alsa)
 | mesa-common-dev        | pkgconfig(gl)                                 |
 | libxcomposite-dev      | pkgconfig(xcomposite)                         |
 | ladspa-sdk             | ladspa-devel                                  |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
-|                        |                                               |
- 
-
- [^1]: sometimes pkgconfig(jack) is needed if the package has problems with building with the pipewire-jack 
+| libx11-xcb-dev         | pkgconfig(xcb)                                |
+| libxcb-util-dev        | pkgconfig(xcb-util)                           |
+| libxcb-cursor-dev      | pkgconfig(xcb-cursor)                         |
+| libxcb-xkb-dev         | pkgconfig(xkb)                                |
+| libxcb-keysyms1-dev    | pkgconfig(xcb-keysyms)                        |
+| libxkbcommon-dev       | pkgconfig(xkbcommon)                          |
+| libxkbcommon-x11-dev   | pkgconfig(xkbcommon-x11)                      |
+| libcairo2-dev          | pkgconfig(cairo)                              |
+| libgtkmm-3.0-dev       | pkgconfig(gtkmm-3.0)                          |
+| libsqlite3-dev         | pkgconfig(sqlite3)                            |

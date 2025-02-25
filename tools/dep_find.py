@@ -6,7 +6,7 @@ from ast import parse
 
 dep_map = {
     "libasound2-dev": "pkgconfig(alsa)",
-    "libjack-jackd2-dev": "pipewire-jack-audio-connection-kit-devel [^1]",
+    "libjack-jackd2-dev": "pipewire-jack-audio-connection-kit-devel",
     "libfreetype-dev": "pkgconfig(freetype2)",
     "libfontconfig1-dev": "pkgconfig(fontconfig)",
     "libx11-dev": "pkgconfig(x11)",
@@ -34,38 +34,55 @@ dep_map = {
 }
 
 
+def markdown():
+    header = """
+### Mapping common used ubuntu build deps to fedora deps.
+
+Best practice in Fedora packages is to use the **pkgconfig(dependcy)** format to define build requirements
+
+#### Example
+
+```
+BuildRequires:  pkgconfig(alsa)
+```
+
+### Mappings
+
+| ubuntu build deps      | Fedora BuildRequire:                          |
+| -----------------------| ----------------------------------------------|"""
+    print(header)
+    for dep in dep_map:
+        fed_dep = dep_map[dep]
+        print(f"| {dep:22} | {fed_dep:45} |")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("deps", nargs="+")
+    parser.add_argument("deps", nargs="?", default=[])
     parser.add_argument("--notfound", action="store_true")
     parser.add_argument("--format", action="store_true")
     parser.add_argument("--markdown", action="store_true")
     args = parser.parse_args()
     found = 0
     notfound = 0
-    for dep in args.deps:
-        if dep in dep_map:
-            found += 1
-            if not args.notfound:
-                if args.markdown:
-                    fed_dep = dep_map[dep]
-                    print(f"| {dep:22} | {fed_dep:45} |")
-                else:
+    if args.markdown:
+        markdown()
+    else:
+        for dep in args.deps:
+            if dep in dep_map:
+                found += 1
+                if not args.notfound:
                     print(dep_map[dep])
-        else:
-            notfound += 1
-            if args.notfound:
-                if args.format:
-                    print(f'"{dep}":"pkgconfig()",')
-                else:
-                    if args.markdown:
-                        fed_dep = "pkgconfig()"
-                        print(f"| {dep:22} | {fed_dep:45} |")
+            else:
+                notfound += 1
+                if args.notfound:
+                    if args.format:
+                        print(f'"{dep}":"pkgconfig()",')
                     else:
                         print(dep)
-            else:
-                print(f"{dep} not found")
-    print(f"Found: {found} Missing: {notfound}")
+                else:
+                    print(f"{dep} not found")
+        print(f"Found: {found} Missing: {notfound}")
 
 
 if __name__ == "__main__":
